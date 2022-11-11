@@ -1,22 +1,26 @@
-build:
+name: DoIt
 
-  runs-on: ubuntu-latest
-  strategy:
-    fail-fast: false
-    matrix:
-      python-version: ["3.10"]
+on: [push]
 
-  steps:
-  - uses: actions/checkout@v3
-  - name: Set up python
-    uses: actions/setup-python@v3
-    with:
-      python-version: ${{ matrix.python-version }}
-  - name: Install dependencies
-    run: |
-      python -m pip install --upgrade pip
-      python -m pip install flake8 pytest
-      pip install -r requirements.txt
-  - name: Test with pytest
-    run: |
-      pytest
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up python
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install flake8 pytest
+        pip install -r requirements.txt
+    - name: Test with pytest
+      run: |
+        pytest
