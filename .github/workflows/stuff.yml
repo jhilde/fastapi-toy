@@ -29,3 +29,17 @@ jobs:
       run: |
         pip install pytest
         pytest
+  lint:
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        flake8 .
+      continue-on-error: true
