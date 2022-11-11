@@ -43,4 +43,4 @@ jobs:
 
     steps:
     - name: Test with pytest
-      run: pytest
+      run: python -m pytest
